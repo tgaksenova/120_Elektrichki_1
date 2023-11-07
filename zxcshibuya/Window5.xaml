@@ -1,0 +1,30 @@
+﻿<Window x:Class="zxcshibuya.Window5"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zxcshibuya"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="450" Width="800">
+    <Grid>
+        <Rectangle Fill="Aqua" HorizontalAlignment="Center" Width="800" Height="91" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text="Ваш Билет"/></TextBlock>
+        <Image Margin="0,10,690,0" Source="/poezd.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="82" Height="71" VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <TextBlock x:Name="napravlenie" HorizontalAlignment="Center" Margin="0,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text=".."/></TextBlock>
+        <TextBlock x:Name="nomer" HorizontalAlignment="Center" Margin="0,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text=".."/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Margin="0,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text="Направление"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Margin="0,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text="Номер билета"/></TextBlock>
+        <Button Content="Выйти"  Style="{DynamicResource LOG}"  HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Click="Button_Click" Height="47" Width="146"/>
+
+
+    </Grid>
+</Window>

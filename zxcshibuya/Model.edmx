@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище shibuya1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="direction">
+          <Key>
+            <PropertyRef Name="id_direction" />
+          </Key>
+          <Property Name="id_direction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direction" Type="nvarchar" MaxLength="50" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" />
+          <Property Name="station" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="logpass">
+          <Key>
+            <PropertyRef Name="id_person" />
+          </Key>
+          <Property Name="id_person" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="20" />
+          <Property Name="pass" Type="nvarchar" MaxLength="20" />
+          <Property Name="Id_role" Type="int" />
+        </EntityType>
+        <EntityType Name="price_cat">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_cat" Type="nvarchar" MaxLength="50" />
+          <Property Name="price_zone" Type="int" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="ticket_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data" Type="date" />
+          <Property Name="time" Type="time" Precision="7" />
+          <Property Name="id_price_cat" Type="int" />
+          <Property Name="id_direction" Type="int" />
+          <Property Name="start_station" Type="nvarchar" MaxLength="50" />
+          <Property Name="end_station" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+          <Property Name="id_person" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_logpass_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="logpass" Type="Self.logpass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="logpass">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_direction">
+          <End Role="direction" Type="Self.direction" Multiplicity="0..1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direction">
+              <PropertyRef Name="id_direction" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_logpass">
+          <End Role="logpass" Type="Self.logpass" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logpass">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_price_cat">
+          <End Role="price_cat" Type="Self.price_cat" Multiplicity="0..1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price_cat">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_price_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище shibuya1ModelContainer">
+          <EntitySet Name="direction" EntityType="Self.direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logpass" EntityType="Self.logpass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="price_cat" EntityType="Self.price_cat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_logpass_roles" Association="Self.FK_logpass_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="logpass" EntitySet="logpass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_direction" Association="Self.FK_ticket_direction">
+            <End Role="direction" EntitySet="direction" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_logpass" Association="Self.FK_ticket_logpass">
+            <End Role="logpass" EntitySet="logpass" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_price_cat" Association="Self.FK_ticket_price_cat">
+            <End Role="price_cat" EntitySet="price_cat" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shibuya1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="direction">
+          <Key>
+            <PropertyRef Name="id_direction" />
+          </Key>
+          <Property Name="id_direction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direction1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="station" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ticket" Relationship="Self.FK_ticket_direction" FromRole="direction" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="logpass">
+          <Key>
+            <PropertyRef Name="id_person" />
+          </Key>
+          <Property Name="id_person" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_role" Type="Int32" />
+          <NavigationProperty Name="roles" Relationship="Self.FK_logpass_roles" FromRole="logpass" ToRole="roles" />
+          <NavigationProperty Name="ticket" Relationship="Self.FK_ticket_logpass" FromRole="logpass" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="price_cat">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_cat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price_zone" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ticket" Relationship="Self.FK_ticket_price_cat" FromRole="price_cat" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="logpass" Relationship="Self.FK_logpass_roles" FromRole="roles" ToRole="logpass" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="ticket_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <Property Name="time" Type="Time" Precision="7" />
+          <Property Name="id_price_cat" Type="Int32" />
+          <Property Name="id_direction" Type="Int32" />
+          <Property Name="start_station" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="end_station" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="id_person" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="direction" Relationship="Self.FK_ticket_direction" FromRole="ticket" ToRole="direction" />
+          <NavigationProperty Name="logpass" Relationship="Self.FK_ticket_logpass" FromRole="ticket" ToRole="logpass" />
+          <NavigationProperty Name="price_cat" Relationship="Self.FK_ticket_price_cat" FromRole="ticket" ToRole="price_cat" />
+        </EntityType>
+        <Association Name="FK_ticket_direction">
+          <End Role="direction" Type="Self.direction" Multiplicity="0..1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direction">
+              <PropertyRef Name="id_direction" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_logpass_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="logpass" Type="Self.logpass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="logpass">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_logpass">
+          <End Role="logpass" Type="Self.logpass" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logpass">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_price_cat">
+          <End Role="price_cat" Type="Self.price_cat" Multiplicity="0..1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price_cat">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_price_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shibuya1Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="direction" EntityType="Self.direction" />
+          <EntitySet Name="logpass" EntityType="Self.logpass" />
+          <EntitySet Name="price_cat" EntityType="Self.price_cat" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" />
+          <AssociationSet Name="FK_ticket_direction" Association="Self.FK_ticket_direction">
+            <End Role="direction" EntitySet="direction" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_logpass_roles" Association="Self.FK_logpass_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="logpass" EntitySet="logpass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_logpass" Association="Self.FK_ticket_logpass">
+            <End Role="logpass" EntitySet="logpass" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_price_cat" Association="Self.FK_ticket_price_cat">
+            <End Role="price_cat" EntitySet="price_cat" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище shibuya1ModelContainer" CdmEntityContainer="shibuya1Entities2">
+          <EntitySetMapping Name="direction">
+            <EntityTypeMapping TypeName="shibuya1Model.direction">
+              <MappingFragment StoreEntitySet="direction">
+                <ScalarProperty Name="id_direction" ColumnName="id_direction" />
+                <ScalarProperty Name="direction1" ColumnName="direction" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="station" ColumnName="station" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logpass">
+            <EntityTypeMapping TypeName="shibuya1Model.logpass">
+              <MappingFragment StoreEntitySet="logpass">
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="price_cat">
+            <EntityTypeMapping TypeName="shibuya1Model.price_cat">
+              <MappingFragment StoreEntitySet="price_cat">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="name_cat" ColumnName="name_cat" />
+                <ScalarProperty Name="price_zone" ColumnName="price_zone" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="shibuya1Model.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket">
+            <EntityTypeMapping TypeName="shibuya1Model.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="ticket_id" ColumnName="ticket_id" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="id_price_cat" ColumnName="id_price_cat" />
+                <ScalarProperty Name="id_direction" ColumnName="id_direction" />
+                <ScalarProperty Name="start_station" ColumnName="start_station" />
+                <ScalarProperty Name="end_station" ColumnName="end_station" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

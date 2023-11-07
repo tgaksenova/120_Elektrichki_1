@@ -1,0 +1,40 @@
+﻿<Window x:Class="zxcshibuya.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zxcshibuya"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="450" Width="800">
+    <Grid>
+        <Rectangle Fill="Aqua" HorizontalAlignment="Center" Width="800" Height="91" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="452" FontFamily="Comic Sans MS" FontSize="40" TextAlignment="Center"><Run Language="ru-ru" Text="Покупка билета"/></TextBlock>
+        <Image Margin="0,10,690,0" Source="/poezd.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="82" Height="71" VerticalAlignment="Top">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <DataGrid x:Name="Usergrid" Margin="212,115,70,88">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+            </DataGrid>
+            <ComboBox x:Name="cat" Margin="22,146,616,239"  >
+            <TextBlock>Бизнесс</TextBlock>
+            <TextBlock>Эконом</TextBlock>
+            <TextBlock>Комфорт</TextBlock>
+            <TextBlock>Комфорт+</TextBlock>
+            <TextBlock>В багажнике</TextBlock>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="-47,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="300" FontFamily="Comic Sans MS" FontSize="15" TextAlignment="Center"><Run Language="ru-ru" Text="Выберите класс билета"/></TextBlock>
+        <Button Content="Отфильтровать" Style="{DynamicResource LOG}" HorizontalAlignment="Left" Margin="30,282,0,0" VerticalAlignment="Top" FontSize="20" Height="64" Width="154" Click="Button_Click_2"/>
+        <Button Content="Купить билет" Style="{DynamicResource LOG}" HorizontalAlignment="Right" Margin="0,0,212,19" VerticalAlignment="Bottom" Click="Button_Click_1" Height="62" Width="234"/>
+    </Grid>
+</Window>

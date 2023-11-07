@@ -1,0 +1,15 @@
+﻿<Window x:Class="zxcshibuya.Window7"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zxcshibuya"
+        mc:Ignorable="d"
+        Title="Удаление записи" Height="450" Width="450" ResizeMode="NoResize">
+    <Grid>
+        <TextBlock  HorizontalAlignment="Center" Margin="0,68,0,0" TextWrapping="Wrap" Foreground="Black" Width="354" FontSize="26" Height="86" VerticalAlignment="Top" FontFamily="Comic Sans MS"><Run Language="ru-ru" Text="Введите "/><Run Text="ID "/><Run Language="ru-ru" Text="записи, которую хотите удалить:"/></TextBlock>
+        <TextBox x:Name="id"  HorizontalAlignment="Left" Margin="48,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" FontFamily="Comic Sans MS"/>
+        <Button Style="{DynamicResource LOG}" Content="Удалить" HorizontalAlignment="Left" Margin="39,200,0,0" VerticalAlignment="Top" FontSize="20" Height="90" Width="320" Click="Button_Click"/>
+
+    </Grid>
+</Window>
